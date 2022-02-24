@@ -30,10 +30,10 @@ def index():
         pred = model.predict([[float(income), float(age),float(loan)]])
         print(pred)
         pred = pred[0]
-        s = "The predicted credit default is " + str(pred)
+        s = "The predicted credit card default is " + str(pred)
         return(render_template("index.html", result=s))
     else: 
-        return(render_template("index.html", result="Prediction not available"))
+        return(render_template("index.html", result="Credit Card Default Prediction"))
 
 
 # In[ ]:
