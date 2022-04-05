@@ -22,18 +22,20 @@ import joblib
 @app.route("/", methods=["GET", "POST"]) 
 def index():
     if request.method == "POST":
-        income = request.form.get("income")
-        age = request.form.get("age")
-        loan = request.form.get("loan")
-        print(income, age, loan)
-        model = joblib.load("creditcard_default")
-        pred = model.predict([[float(income), float(age),float(loan)]])
+        longitude = request.form.get("latitude")
+        latitude = request.form.get("longitude")
+        microwave = request.form.get("microwave")
+        smoking_allowed = request.form.get("smoking_allowed")
+        p_livingroom = request.form.get("p_livingroom")
+        print(longitude, latitude, microwave,smoking_allowed,p_livingroom)
+        model = joblib.load("Automatic_Price_Generator")
+        pred = model.predict([[float(latitude), float(longitude),int(microwave),int(smoking_allowed),int(p_livingroom)]])
         print(pred)
         pred = pred[0]
-        s = "The predicted credit card default is " + str(pred)
+        s = "The predicted price for your apartment is " + str(pred)
         return(render_template("index.html", result=s))
     else: 
-        return(render_template("index.html", result="Credit Card Default Prediction"))
+        return(render_template("index.html", result="Please enter the required information to estimate a price to charge your guests"))
 
 
 # In[ ]:
